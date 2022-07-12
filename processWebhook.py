@@ -1,8 +1,11 @@
 import flask
 import os
-
+import urllib.parse
 import redis
 from flask import send_from_directory
+
+url = urllib.parse.urlparse(os.environ.get('REDISCLOUD_URL'))
+r = redis.Redis(host=url.hostname, port=url.port, password=url.password)
 
 app = flask.Flask(__name__)
 
